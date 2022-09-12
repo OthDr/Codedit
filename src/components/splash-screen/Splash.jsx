@@ -11,7 +11,7 @@ const Splash = () => {
         <DiCode className="text-sky-600" size={65} />
       </div>
       <Link
-        to="/welcome"
+        to="/file"
         className="w-fit mx-auto flex items-center text-sky-300 text-2xl font-bold animate-bounce"
       >
         Start <TiArrowRightThick className="text-sky-300 mx-2" size={30} />
