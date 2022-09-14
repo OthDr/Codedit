@@ -1,4 +1,5 @@
 const { readdir, readFile } = require('node:fs/promises');
+const path = require('path');
 
 const readFolder = async (req, res) => {
   const { folderPath } = req.body;
@@ -26,9 +27,11 @@ const fileContent = async (req, res) => {
   }
   try {
     const content = await readFile(folderPath + '/' + fileName);
-    const data = content.toString();
-    return res.json({ message: 'File Found.', data });
+    const fileContent = content.toString();
+    const fileExtension = path.extname(`${folderPath}/${fileName}`);
+    return res.json({ message: 'File Found.', fileContent, fileExtension });
   } catch (error) {
+    console.log(error);
     return res
       .status(500)
       .json({ message: 'Error Reading File Content', error });
