@@ -4,10 +4,10 @@ import axios from '../../../api/axios';
 const FOLDER_URL = '/files';
 const FILE_URL = '/files/file';
 
-const SideBar = () => {
+const SideBar = (props) => {
   const [folderPath, setFolderPath] = useState('');
   const [folder, setFolder] = useState('');
-  const [files, setFiles] = useState(['']);
+  const [files, setFiles] = useState();
 
   const submitFolderPath = async (e) => {
     e.preventDefault();
@@ -27,7 +27,6 @@ const SideBar = () => {
         console.log(response.data);
         setFolder(folderPath.split('/').pop());
         setFiles(response.data.files);
-        // setFolderPath('');
       } catch (err) {
         console.log(err.response);
       }
@@ -47,16 +46,16 @@ const SideBar = () => {
           }
         );
         console.log(response.data);
+        props.childToParent(fileName, response.data.fileExtension, response.data.fileContent, folderPath);
       } catch (error) {
         console.log(error.response);
       }
     }
   };
 
-  console.log(folder);
   return (
     <aside className="w-44 border-l border-sky-800 bg-[#011627] absolute right-0 h-full">
-      {files[0] ? (
+      {files ? (
         <h1 className="text-lg font-semibold uppercase text-center border-b border-sky-800 py-7">
           {folder}
         </h1>
@@ -82,21 +81,23 @@ const SideBar = () => {
         </form>
       )}
 
-      <div className="flex flex-col border-y border-gray-600 space-y-1 divide-y divide-gray-600">
-        {files
-          ? files.map((file, key) => (
-              <div
-                onClick={() => {
-                  submitFile(file);
-                }}
-                key={key}
-                className="p-1 cursor-pointer hover:bg-gray-600"
-              >
-                <h1>{file}</h1>
-              </div>
-            ))
-          : ''}
-      </div>
+      {files ? (
+        <div className="flex flex-col border-y border-gray-600 space-y-1 divide-y divide-gray-600">
+          {files.map((file, key) => (
+            <div
+              onClick={() => {
+                submitFile(file);
+              }}
+              key={key}
+              className="p-1 cursor-pointer hover:bg-gray-600"
+            >
+              <h1>{file}</h1>
+            </div>
+          ))}
+        </div>
+      ) : (
+        ''
+      )}
     </aside>
   );
 };
