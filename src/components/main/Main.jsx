@@ -5,12 +5,12 @@ import SideBar from './inc/SideBar';
 
 const Main = (props) => {
   return (
-    <div>
+    <main className="bg-[#011627] text-white">
       <TopBar />
       <SideBar />
-      <div>{props.children}</div>
+      <section>{props.children}</section>
       <BottomBar />
-    </div>
+    </main>
   );
 };
 

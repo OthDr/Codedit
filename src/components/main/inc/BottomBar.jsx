@@ -1,7 +1,7 @@
 import React from 'react';
 
 const BottomBar = () => {
-  return <div>BottomBar</div>;
+  return <footer>BottomBar</footer>;
 };
 
 export default BottomBar;
