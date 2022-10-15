@@ -3,12 +3,12 @@ import TopBar from './inc/TopBar';
 import BottomBar from './inc/BottomBar';
 import SideBar from './inc/SideBar';
 
-const Main = () => {
+const Main = (props) => {
   return (
     <div>
       <TopBar />
       <SideBar />
-
+      <div>{props.children}</div>
       <BottomBar />
     </div>
   );
