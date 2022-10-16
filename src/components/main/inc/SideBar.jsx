@@ -2,10 +2,13 @@ import {React, useState} from 'react';
 const [sideBar, setSideBar] = useState(true);
 
 const SideBar = () => {
-  return 
-  <aside className='absolute top-0 left-0 h-screen w-80 bg-[#011627]'>
-    <h1>SideBar</h1>
-  </aside>;
+  return (
+    <aside className="w-44 border-l border-sky-600 bg-[#011627] absolute right-0 h-full">
+      <h1 className="text-lg font-semibold uppercase text-center">
+        AwsomeProject
+      </h1>
+    </aside>
+  );
 };
 
 export default SideBar;
