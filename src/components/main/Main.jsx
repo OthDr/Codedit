@@ -5,7 +5,7 @@ import SideBar from './inc/SideBar';
 
 const Main = (props) => {
   return (
-    <main className="bg-[#011627] text-white">
+    <main className="bg-[#011627] text-white relative">
       <TopBar />
       <SideBar />
       <section>{props.children}</section>
