@@ -5,10 +5,10 @@ import SideBar from './inc/SideBar';
 
 const Main = (props) => {
   return (
-    <main className="bg-[#011627] text-white">
+    <main className="bg-[#011627] text-white flex flex-col justify-between h-screen">
       <TopBar />
       <SideBar />
-      <section>{props.children}</section>
+      <section className='flex-auto'>{props.children}</section>
       <BottomBar />
     </main>
   );
