@@ -3,16 +3,18 @@ import Main from '../main/Main';
 
 const FileEdit = () => {
 
-  const [textCode, setTextCode] = useState('');
+  const [textCode, setTextCode] = useState({});
+  const[words, setWords] = useState('');
   const [numRows, setNumRows] = useState(0);
 
   const handleCodeChange = (e) => {
     setTextCode(e.target.value);
     
     // increment row count with new textarea line
-    if (e.target.value === '\r\n') {
+    if (words == '\r\n') {
       setNumRows(() => numRows + 1);
       console.log(numRows+" new line ");
+      console.log('a');
     }
 
   }
