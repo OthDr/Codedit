@@ -4,23 +4,34 @@ import Main from '../main/Main';
 const FileEdit = () => {
 
   const [textCode, setTextCode] = useState({});
-  const[words, setWords] = useState('');
-  const [numRows, setNumRows] = useState(0);
+  const [words, setWords] = useState('');
+  const [numRows, setNumRows] = useState(1);
+
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      console.log('enter press here! ')
+    }
+  }
 
   const handleCodeChange = (e) => {
     setTextCode(e.target.value);
-    
+    console.log();
+
     // increment row count with new textarea line
-    if (words == '\r\n') {
-      setNumRows(() => numRows + 1);
-      console.log(numRows+" new line ");
-      console.log('a');
-    }
+    // if (words == '\r\n') {
+    //   setNumRows(() => numRows + 1);
+    //   console.log(numRows + " new line ");
+    //   console.log('a');
+    // }
 
   }
   console.log(textCode);
+
+
   return <Main>
     <div className='p-2 flex w-full h-full  bg-black/30'>
+
       <div className='flex flex-col'>
         <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>1</div>
         <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>2</div>
@@ -37,9 +48,12 @@ const FileEdit = () => {
         <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>13</div>
       </div>
 
-      <textarea onChange={handleCodeChange} className='px-2 w-full h-full bg-transparent' name="codeEdit" id="codeEdit" cols="30" rows="10">var x = 10 - 2 ; </textarea>
+      <textarea onChange={handleCodeChange} className='px-2 w-full h-fit bg-transparent' name="codeEdit" id="codeEdit" cols="30" rows={numRows}>var x = 10 - 2 ; </textarea>
+
     </div>
+
   </Main>;
+
 };
 
 export default FileEdit;
