@@ -52,7 +52,6 @@ const SideBar = (props) => {
       }
     }
   };
-
   return (
     <aside className="w-44 border-l border-sky-800 bg-[#011627] absolute right-0 h-full">
       {files ? (
