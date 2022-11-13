@@ -1,69 +1,47 @@
-import { React, useState } from 'react';
+import React from 'react';
+import { useState } from 'react';
+import BottomBar from '../main/inc/BottomBar';
+import SideBar from '../main/inc/SideBar';
+import TopBar from '../main/inc/TopBar';
 import Main from '../main/Main';
 
 const FileEdit = () => {
+  const [data, setData] = useState({});
 
-  const [textCode, setTextCode] = useState({});
-  const [words, setWords] = useState('');
-  const [numRows, setNumRows] = useState(1);
+  const childToParent = (fileName, fileExtension, fileContent, folderPath) => {
+    setData({
+      fileName: fileName,
+      fileExtension: fileExtension,
+      fileContent: fileContent,
+      folderPath: folderPath,
+    });
+  };
+  // childToParent();
+  const FileToBar = () => {};
+  console.log(data);
+  return (
+    <div className="bg-[#011627] text-white flex flex-col justify-between h-screen">
+      <TopBar
+        fileName={data.fileName}
+        fileExtension={data.fileExtension}
+        folderPath={data.folderPath}
+      />
+      <SideBar childToParent={childToParent} />
 
-
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      console.log('enter press here! ')
-    }
-  }
-
-  const handleCodeChange = (e) => {
-    setTextCode(e.target.value);
-    console.log();
-
-    // increment row count with new textarea line
-    // if (words == '\r\n') {
-    //   setNumRows(() => numRows + 1);
-    //   console.log(numRows + " new line ");
-    //   console.log('a');
-    // }
-
-  }
-  console.log(textCode);
-
-
-  return <Main>
-    <div className='p-2 flex w-full h-full  bg-black/30'>
-
-      <div className='flex flex-col'>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>1</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>2</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>3</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>4</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>5</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>6</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>7</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>8</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>9</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>10</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>11</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>12</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>13</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>14</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>15</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>16</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>17</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>18</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>19</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>20</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>21</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>22</div>
-        <div className='px-4 text-right  font-semibold text-gray-500 cursor-pointer'>23</div>
-      </div>
-
-      <textarea onChange={handleCodeChange} className='px-2 w-full h-fit bg-transparent' name="codeEdit" id="codeEdit" cols="30" rows={numRows}>var x = 10 - 2 ; </textarea>
-
+      {data.fileContent ? (
+        <div className="flex-auto mr-32 pr-4">
+          <textarea
+            className="text-sm block w-full h-full  bg-transparent placeholder-gray-300 text-white border-1 ring-transparent focus:ring-0 focus:border-sky-500"
+            value={data.fileContent}
+            spellCheck={false}
+          />
+        </div>
+      ) : (
+        ''
+      )}
+      <BottomBar />
     </div>
-
-  </Main>;
-
+  );
 };
 
 export default FileEdit;
