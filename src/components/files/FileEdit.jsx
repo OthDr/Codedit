@@ -20,7 +20,7 @@ const FileEdit = () => {
   const FileToBar = () => {};
   console.log(data);
   return (
-    <div className="bg-[#011627] text-white flex flex-col justify-between h-screen">
+    <div className="bg-slate-900/90 text-white flex flex-col justify-between h-screen">
       <TopBar
         fileName={data.fileName}
         fileExtension={data.fileExtension}
@@ -28,7 +28,7 @@ const FileEdit = () => {
       />
       <SideBar childToParent={childToParent} />
 
-      {data.fileContent ? (
+      {/* {data.fileContent ? (
         <div className="flex-auto mr-32 pr-4">
           <textarea
             className="text-sm block w-full h-full  bg-transparent placeholder-gray-300 text-white border-1 ring-transparent focus:ring-0 focus:border-sky-500"
@@ -38,7 +38,13 @@ const FileEdit = () => {
         </div>
       ) : (
         ''
-      )}
+      )} */}
+      <textarea
+            className="text-sm block w-full h-full  bg-transparent placeholder-gray-300 text-white border-1 ring-transparent focus:ring-0 focus:border-sky-500"
+            value={data.fileContent}
+            spellCheck={false}
+          />
+        
       <BottomBar />
     </div>
   );

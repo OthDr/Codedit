@@ -3,7 +3,7 @@ import { TiDocument } from 'react-icons/ti';
 
 const TopBar = (props) => {
   return (
-    <nav className="w-full shadow-sm shadow-sky-900 mb-2">
+    <nav className="bg-[#011627] w-full shadow-sm shadow-sky-900 py-2 ">
       <div className="flex items-center">
         {/* Title Section */}
         <h1 className="w-fit text-left font-bold text-xl p-2 text-sky-500">
