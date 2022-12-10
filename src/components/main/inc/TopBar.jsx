@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { TiDocument } from 'react-icons/ti';
+import { ImHtmlFive, ImCss3 } from 'react-icons/im';
+import { VscJson } from 'react-icons/vsc';
+import { SiJavascript } from 'react-icons/si';
 
 const TopBar = (props) => {
   return (
-    <nav className="bg-[#011627] w-full shadow-sm shadow-sky-900 py-2 ">
+    <nav className="bg-[#011627] w-full shadow-sm shadow-sky-900">
       <div className="flex items-center">
         {/* Title Section */}
         <h1 className="w-fit text-left font-bold text-xl p-2 text-sky-500">
@@ -22,22 +25,13 @@ const TopBar = (props) => {
         <div className="flex justify-start items-center">
           <div className="flex justify-evenly items-center p-2 border-t border-r border-sky-900 rounded-t">
             {props.fileExtension === '.js' ? (
-              <span className="p-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4 text-yellow-500"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"
-                  />
-                </svg>
-              </span>
+              <SiJavascript className="p-2 text-yellow-600" size={35} />
+            ) : props.fileExtension === '.html' ? (
+              <ImHtmlFive className="p-2 text-orange-600" size={35} />
+            ) : props.fileExtension === '.css' ? (
+              <ImCss3 className="p-2 text-sky-600" size={35} />
+            ) : props.fileExtension === '.json' ? (
+              <VscJson className="p-2 text-yellow-600" size={35} />
             ) : (
               <TiDocument className="p-2 text-gray-500" size={40} />
             )}
