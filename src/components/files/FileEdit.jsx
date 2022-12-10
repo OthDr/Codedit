@@ -10,6 +10,14 @@ const FileEdit = () => {
   const [data, setData] = useState({});
   const [fileContent, setFileContent] = useState('');
   const [options, setOptions] = useState([
+    'let',
+    'var',
+    'if',
+    'console',
+    'console.log()',
+    'import',
+    'document',
+    '.getElementById',
     'await',
     'break',
     'case',
@@ -218,6 +226,16 @@ const FileEdit = () => {
                   break;
 
                 default:
+                  return (
+                    <div
+                      onClick={() => updateCodeArea(value)}
+                      className="flex flex-col border border-b border-gray-600 p-2 cursor-pointer hover:bg-gray-700"
+                      key={key}
+                      tabIndex="0"
+                    >
+                      <span className="px-1 text-gray-400">{value}</span>
+                    </div>
+                  );
                   break;
               }
             })}
