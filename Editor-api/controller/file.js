@@ -1,6 +1,8 @@
 const { readdir, readFile } = require('node:fs/promises');
 const path = require('path');
 
+const fs = require('fs');
+
 const readFolder = async (req, res) => {
   const { folderPath } = req.body;
   if (!folderPath) {
@@ -37,6 +39,25 @@ const fileContent = async (req, res) => {
       .json({ message: 'Error Reading File Content', error });
   }
 };
+
+const createFile = async (req, res) => {
+
+  const { fullFilePath } = req.body;
+
+  if (!fullFilePath) {
+    return res.status(404).json({ message: 'Make sur all file details are defined' });
+  } else {
+    fs.writeFile(fullFilePath, '', (err) => {
+      if (err) {
+        return res.status(404).json({ message: 'something wrong happened' });
+      }
+      console.log("file was saved");
+      return res.status(201).json({ message: 'File created', fullFilePath });
+    });
+
+  }
+
+}
 
 const keyWords = (req, res) => {
   return [
@@ -84,4 +105,5 @@ const keyWords = (req, res) => {
 module.exports = {
   readFolder,
   fileContent,
+  createFile,
 };

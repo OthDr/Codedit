@@ -7,8 +7,10 @@ import axios from '../../../api/axios';
 
 const FOLDER_URL = '/files';
 const FILE_URL = '/files/file';
+const CREATE_FILE = '/files/create';
 
 const SideBar = (props) => {
+  const [fullFilePath, setFullFilePath] = useState('');
   const [folderPath, setFolderPath] = useState('');
   const [folder, setFolder] = useState('');
   const [files, setFiles] = useState();
@@ -43,7 +45,7 @@ const SideBar = (props) => {
       try {
         const response = await axios.post(
           FILE_URL,
-          JSON.stringify({ fileName, folderPath }),
+          JSON.stringify({ filePath }),
           {
             headers: {
               'Content-Type': 'application/json',
@@ -61,6 +63,28 @@ const SideBar = (props) => {
       } catch (error) {
         console.log(error.response);
       }
+    }
+  };
+
+  const createFile = async () => {
+    e.preventDefault();
+    if (fullFilePath) {
+      try {
+        const response = await axios.post(
+          CREATE_FILE,
+          JSON.stringify({ fullFilePath }),
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.log(error.response);
+      }
+    } else {
+      alert('full Path is empty');
     }
   };
   return (
@@ -119,6 +143,26 @@ const SideBar = (props) => {
       ) : (
         ''
       )}
+
+      <form className="p-1 space-y-2 mt-4" onSubmit={createFile}>
+        <div>
+          <input
+            className="text-sm block w-full bg-gray-700 border-gray-600 placeholder-gray-300 text-white ring-sky-500 focus:border-sky-500"
+            type="text"
+            id="fullFilePath"
+            onChange={(e) => setFullFilePath(e.target.value)}
+            value={fullFilePath}
+            placeholder="full Path"
+          />
+        </div>
+        <div className="flex justify-end">
+          <input
+            type="submit"
+            value="Create"
+            className="w-full bg-gray-600 hover:bg-gray-500 text-gray-200 text-sm cursor-pointer font-bold py-1 rounded focus:outline-none focus:shadow-outline transition-all ease-in-out duration-300"
+          />
+        </div>
+      </form>
     </aside>
   );
 };

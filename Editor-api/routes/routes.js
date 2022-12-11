@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { readFolder, fileContent } = require('../controller/file');
+const { readFolder, fileContent, createFile } = require('../controller/file');
 
 router.post('/', readFolder);
 router.post('/file', fileContent);
-router.post('/keywords', keyWords);
+router.post('/create', createFile);
 
 module.exports = router;
