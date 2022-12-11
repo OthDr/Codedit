@@ -1,4 +1,8 @@
 import { useState } from 'react';
+import { TiDocument } from 'react-icons/ti';
+import { ImHtmlFive, ImCss3 } from 'react-icons/im';
+import { VscJson } from 'react-icons/vsc';
+import { SiJavascript } from 'react-icons/si';
 import axios from '../../../api/axios';
 
 const FOLDER_URL = '/files';
@@ -8,6 +12,7 @@ const SideBar = (props) => {
   const [folderPath, setFolderPath] = useState('');
   const [folder, setFolder] = useState('');
   const [files, setFiles] = useState();
+  const [fileExtension, setFileExtension] = useState('');
 
   const submitFolderPath = async (e) => {
     e.preventDefault();
@@ -45,8 +50,14 @@ const SideBar = (props) => {
             },
           }
         );
-        console.log(response.data);
-        props.childToParent(fileName, response.data.fileExtension, response.data.fileContent, folderPath);
+        // console.log(response.data);
+        setFileExtension(response.data.fileExtension);
+        props.childToParent(
+          fileName,
+          response.data.fileExtension,
+          response.data.fileContent,
+          folderPath
+        );
       } catch (error) {
         console.log(error.response);
       }
@@ -88,8 +99,19 @@ const SideBar = (props) => {
                 submitFile(file);
               }}
               key={key}
-              className="p-1 cursor-pointer hover:bg-gray-600"
+              className="p-1 flex  items-center cursor-pointer hover:bg-gray-600"
             >
+              {file.split('.')[1] === 'js' ? (
+                <SiJavascript className="p-2 text-yellow-600" size={35} />
+              ) : file.split('.')[1] === 'html' ? (
+                <ImHtmlFive className="p-2 text-orange-600" size={35} />
+              ) : file.split('.')[1] === 'css' ? (
+                <ImCss3 className="p-2 text-sky-600" size={35} />
+              ) : file.split('.')[1] === 'json' ? (
+                <VscJson className="p-2 text-yellow-600" size={35} />
+              ) : (
+                <TiDocument className="p-2 text-gray-500" size={40} />
+              )}
               <h1>{file}</h1>
             </div>
           ))}
